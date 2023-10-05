@@ -1,7 +1,6 @@
 package com.example.premisssiondemo
 import android.Manifest
 import android.app.AlertDialog
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -59,9 +58,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val btnCameraPermission : Button = findViewById(R.id.btnCameraPermission)
         btnCameraPermission.setOnClickListener {
-            if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
-                showRationaleDialog(" Permission Demo requires camera access",
-                    "Camera cannot be used because Camera access is denied")
+            if (this.shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
+                " Permission Demo requires camera access".showRationaleDialog("Camera cannot be used because Camera access is denied")
 
             }else
                 //** This is for Single Permission
@@ -75,12 +73,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-private fun showRationaleDialog(
-    title: String,
-    message: String,
-) {
-    val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-    builder.setTitle(title)
+private fun String.showRationaleDialog(message: String) {
+    val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+    builder.setTitle(this)
         .setMessage(message)
         .setPositiveButton("Cancel") { dialog, _ ->
             dialog.dismiss()
